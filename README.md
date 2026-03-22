@@ -33,8 +33,12 @@ The easiest way to run the application is using Docker Compose:
 git clone https://github.com/james-willett/bug-tracker.git
 cd bug-tracker
 
-# Launch the application
-docker compose up --build
+# Launch the application the first time
+docker compose up -d --build
+# Launch the application subsequently
+docker compose up -d
+# Stop the application
+docker compose down
 ```
 
 The application will be available at:
@@ -139,8 +143,12 @@ To start Jenkins locally using Docker Compose:
 cd jenkins
 -- build custom jenkins image
 docker build -t my-jenkins .
--- Run jenkins
-docker-compose up --build
+-- Run jenkins first time
+docker compose up -d --build
+-- Run jenkins subsequently
+docker compose up -d
+-- Stop jenkins
+docker compose down
 ```
 
 Jenkins will then be available at [http://localhost:9000](http://localhost:9000).
