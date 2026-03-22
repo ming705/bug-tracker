@@ -137,6 +137,9 @@ To start Jenkins locally using Docker Compose:
 
 ```bash
 cd jenkins
+-- build custom jenkins image
+docker build -t my-jenkins .
+-- Run jenkins
 docker-compose up --build
 ```
 
