@@ -152,6 +152,7 @@ docker compose down
 ```
 
 Jenkins will then be available at [http://localhost:9000](http://localhost:9000).
+Admin User: mxie / Welcome1
 
 ## Contributing
 
