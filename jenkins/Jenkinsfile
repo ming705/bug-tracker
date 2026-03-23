@@ -1,16 +1,19 @@
 pipeline {
     agent {
         docker {
-            image 'golang:1.26.1-alpine'
+            image 'node:25.8.1-alpine'
             reuseNode true
         }
     }
 
     stages {
-        stage('Unit Tests - Backend') {
+        stage('Unit Tests - Frontend') {
             steps {
-                dir('bugtracker-backend') {
-                    sh 'go test -v ./...'
+                dir('bugtracker-frontend') {
+                    sh '''
+                      npm ci
+                      npm test
+                    '''
                 }
             }
         }
