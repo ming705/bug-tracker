@@ -15,7 +15,23 @@ pipeline {
                       mkdir -p /tmp/go-build
                       export GOCACHE=/tmp/go-build
                       go test -v ./...
+
+                      # Generate coverage report
+                      go test -coverprofile=coverage.out -covermode=atomic ./...
+                      go tool cover -html=coverage.out -o coverage.html
+
+                      mkdir -p reports
+                      mv coverage.html reports/
                     '''
+                }
+            }
+            post {
+                always {
+                    publishHTML target: [
+                        reportDir: 'bugtracker-backend/reports',
+                        reportFiles: 'coverage.html',
+                        reportName: 'Backend Coverage Report'
+                    ]
                 }
             }
         }
@@ -32,12 +48,19 @@ pipeline {
                     sh '''
                       npm ci
                       npm test
+                      mkdir -p reports
+                      mv coverage reports/
                     '''
                 }
             }
             post {
                 always {
                     junit 'bugtracker-frontend/test-results.xml'
+                    publishHTML target: [
+                        reportDir: 'bugtracker-frontend/reports/coverage',
+                        reportFiles: 'index.html',
+                        reportName: 'Frontend Coverage Report'
+                    ]
                 }
             }
         }
