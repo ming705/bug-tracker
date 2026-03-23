@@ -15,7 +15,7 @@ pipeline {
                       mkdir -p /tmp/go-build
                       go env -w GOCACHE=/tmp/go-build
                       go test -v ./...
-                    ...
+                    '''
                 }
             }
         }
